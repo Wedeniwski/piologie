@@ -1,0 +1,16 @@
+#
+# S/390, IBM C++ for OS/390
+#
+CC           = cxx
+CFLAGS       = -O  -D_Old_STD_ -DDEFINE_VS_CONST
+CFLAGS_KEY   = -D_NEEDS_PIOLOGIE_KEY_
+OBJ          = o
+LIB_SUFFIX   = a
+OUTPUT       = -o $@
+COMPILE_ONLY = $(CC) $(CFLAGS) -c
+OUTPUT       = -o $@
+MAKE_LIB     = ar cr $@ $(ALL_OBJS)
+MAKE_KEYLIB  = ar cr piologie.$(LIB_SUFFIX) $(PIOLOGIE_OBJS)
+LINK         = $(CC) -o $@ $@.$(OBJ) piologie.$(LIB_SUFFIX)
+LINK_TEST    = $(CC) -o test test.$(OBJ) $(SUPPLEMENT_OBJS) piologie.$(LIB_SUFFIX)
+SUFFIX       = C

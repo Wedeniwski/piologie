@@ -1,0 +1,15 @@
+#
+# Pentium, IBM C/C++ 3.6:
+#
+CC           = icc
+CFLAGS       = /Q+ /G5 /Gf+ /Gi+ /O+ /Om- /D_Old_STD_
+CFLAGS_KEY   = /D_NEEDS_PIOLOGIE_KEY_
+OBJ          = obj
+LIB_SUFFIX   = lib
+COMPILE_ONLY = $(CC) /c
+OUTPUT       =
+MAKE_LIB     = ilib /nologo $(ALL_OBJS) /out:piologie.$(LIB_SUFFIX)
+MAKE_KEYLIB  = ilib /nologo $(PIOLOGIE_OBJS) /out:piologie.$(LIB_SUFFIX)
+LINK         = $(CC) $@.$(OBJ) piologie.$(LIB_SUFFIX)
+LINK_TEST    = $(CC) test.$(OBJ) $(SUPPLEMENT_OBJS) piologie.$(LIB_SUFFIX)
+SUFFIX       = cpp

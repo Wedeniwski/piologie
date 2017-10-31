@@ -1,0 +1,15 @@
+#
+# HP PA-RISC 2.0, HP aC++ A.01.00:
+#
+CC           = aCC
+CFLAGS       = +O4 +DA2.0 -D_Old_STD_
+CFLAGS_KEY   = -D_NEEDS_PIOLOGIE_KEY_
+OBJ          = o
+LIB_SUFFIX   = a
+COMPILE_ONLY = $(CC) -c
+OUTPUT       = -o $@
+MAKE_LIB     = ar cr $@ $(ALL_OBJS); ranlib $@
+MAKE_KEYLIB  = ar cr piologie.$(LIB_SUFFIX) $(PIOLOGIE_OBJS); ranlib piologie.$(LIB_SUFFIX)
+LINK         = $(CC) $(CFLAGS) $@.$(OBJ) piologie.$(LIB_SUFFIX) -o $@
+LINK_TEST    = $(CC) $(CFLAGS) test.$(OBJ) $(SUPPLEMENT_OBJS) piologie.$(LIB_SUFFIX) -o test
+SUFFIX       = cpp
